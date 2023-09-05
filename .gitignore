@@ -24,3 +24,6 @@ insignia_notify-*.tar
 
 # Temporary files, for example, from tests.
 /tmp/
+
+# Mac files
+.DS_Store
