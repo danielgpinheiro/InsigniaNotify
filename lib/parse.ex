@@ -39,9 +39,9 @@ defmodule InsigniaNotify.Parse do
       url: game_url,
       serial: serial,
       code: code,
-      online_users: online_users,
-      active_players: active_players,
-      active_sessions: active_sessions
+      online_users: String.to_integer(online_users),
+      active_players: String.to_integer(active_players),
+      active_sessions: String.to_integer(active_sessions)
     }
   end
 
@@ -71,8 +71,9 @@ defmodule InsigniaNotify.Parse do
       list
       |> Enum.at(0)
       |> String.replace("\n", "")
+      |> String.replace("-", "0")
 
-    {active_players, "-"}
+    {active_players, "0"}
   end
 
   defp handle_active_players_content(list) when length(list) == 2 do
