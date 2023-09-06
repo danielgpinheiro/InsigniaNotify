@@ -55,11 +55,11 @@ defmodule InsigniaNotify do
 
       prev_game_active_players = Map.get(prev_state_game, :active_players)
 
-      if prev_game_active_players < game_active_players do
+      if prev_game_active_players < game_active_players and prev_game_active_players == 0 do
         CreateNotification.create(%{game: game, new_session: true})
       end
 
-      if prev_game_active_players > game_active_players do
+      if prev_game_active_players > game_active_players and game_active_players == 0 do
         CreateNotification.create(%{game: game, new_session: false})
       end
 
