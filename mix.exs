@@ -7,7 +7,8 @@ defmodule InsigniaNotify.MixProject do
       version: "0.1.0",
       elixir: "~> 1.15",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      default_task: "run"
     ]
   end
 
@@ -23,9 +24,8 @@ defmodule InsigniaNotify.MixProject do
     [
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
       {:floki, "~> 0.34.0"},
-      {:req, "~> 0.3.0"},
-      {:req_easyhtml, "~> 0.1.0"},
-      {:httpoison, "~> 2.0"}
+      {:httpoison, "~> 2.0"},
+      {:poison, "~> 5.0"}
     ]
   end
 end

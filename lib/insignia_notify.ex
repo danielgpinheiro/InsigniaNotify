@@ -1,25 +1,27 @@
 defmodule InsigniaNotify do
   alias InsigniaNotify.Html.Find
-  alias InsigniaNotify.Http.GetHTML
+  alias InsigniaNotify.Http.CreateNotification
+  alias InsigniaNotify.Http.GetInsigniaData
   alias InsigniaNotify.Job.Execute
   alias InsigniaNotify.Data.State
 
-  @base_url "http://localhost:8080"
-  # @base_url "https://insignia.live/"
-  @games_table_rows_selector "#games table tbody tr"
+  @base_url "https://insignia.live/"
+  @games_table_rows_selector "#games table tbody tr:nth-child(-n+3)"
   @stats_selector "section#connect"
   @games_state_name :games
   @stats_state_name :stats
 
   def run do
-    # Execute.start(:normal, :args)
+    IO.puts("Application started")
+
+    Execute.start(:normal, :args)
     State.start_link(@games_state_name, @stats_state_name)
 
     get_and_parse()
   end
 
   def get_and_parse do
-    GetHTML.get_insignia_data(@base_url)
+    GetInsigniaData.get(@base_url)
     |> parse_document()
   end
 
@@ -54,17 +56,15 @@ defmodule InsigniaNotify do
       prev_game_active_players = Map.get(prev_state_game, :active_players)
 
       if prev_game_active_players < game_active_players do
-        IO.inspect(game_serial)
-        IO.inspect(game_active_players)
-        IO.inspect("ta maior")
-        IO.inspect("===========")
+        CreateNotification.create(%{game: game, new_session: true})
       end
 
       if prev_game_active_players > game_active_players do
-        IO.inspect(game_serial)
-        IO.inspect(game_active_players)
-        IO.inspect("ta menor")
-        IO.inspect("===========")
+        CreateNotification.create(%{game: game, new_session: false})
+      end
+
+      if prev_game_active_players == game_active_players do
+        {:ok}
       end
     end)
   end

@@ -14,8 +14,8 @@ defmodule InsigniaNotify.Http.Api do
     end
   end
 
-  def post(base_url, body, options) do
-    case HTTPoison.post(base_url, body, options) do
+  def post(base_url, body, headers) do
+    case HTTPoison.post(base_url, body, headers) do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
         HandleResponse.response(:ok, body)
 
