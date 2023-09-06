@@ -1,8 +1,7 @@
 defmodule InsigniaNotify.Job.Interval do
   use GenServer, restart: :transient
 
-  @time 10000
-  # @time 500_000
+  @time 300_000
 
   def start_link(initial_value) do
     GenServer.start_link(__MODULE__, initial_value, name: __MODULE__)
