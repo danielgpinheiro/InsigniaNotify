@@ -21,6 +21,10 @@ defmodule InsigniaNotify.Http.CreateNotification do
 
     no_session_message = "#{game_name} (#{game_serial}) no longer has active sessions"
 
+    IO.puts(
+      "Push Notification #{game_name} (#{game_serial}) - Players: #{game_active_players} - New Session: #{new_session}"
+    )
+
     body = %{
       topic: "insignia_notify",
       message:

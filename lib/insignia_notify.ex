@@ -6,18 +6,18 @@ defmodule InsigniaNotify do
   alias InsigniaNotify.Data.State
 
   @base_url "https://insignia.live/"
-  @games_table_rows_selector "#games table tbody tr:nth-child(-n+3)"
+  @games_table_rows_selector "#games table tbody tr"
   @stats_selector "section#connect"
   @games_state_name :games
   @stats_state_name :stats
 
   def run do
-    IO.puts("Application started")
-
     Execute.start(:normal, :args)
     State.start_link(@games_state_name, @stats_state_name)
 
     get_and_parse()
+
+    IO.puts("Application started")
   end
 
   def get_and_parse do
