@@ -52,8 +52,22 @@ defmodule InsigniaNotify.Http.CreateNotification do
     {:ok, body}
   end
 
-  defp push_notification({:ok, body}) do
-    req_body = Poison.encode!(body)
+  def push_notification({:ok, _}) do
+    # def push_notification({:ok, body}) do
+    req_body =
+      Poison.encode!(%{
+        topic: "insignia_notify_test",
+        message: "Project Gotham Racing 2 has 3 active players and 5 sessions now",
+        title: "New game session in Insignia",
+        tags: [
+          "new",
+          "video_game"
+        ],
+        priority: 4,
+        click: "https://insignia.live/#games"
+      })
+
+    # req_body = Poison.encode!(body)
     {_, token} = Application.get_env(:insignia_notify, :ntfy_token)
     base_url = "http://ntfy.sh"
     headers = [Authorization: "Bearer #{token}", "Content-Type": "application/json"]
