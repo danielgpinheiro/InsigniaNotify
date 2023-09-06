@@ -1,4 +1,4 @@
-defmodule InsigniaNotify.HandleResponse do
+defmodule InsigniaNotify.Http.HandleResponse do
   def response(:ok, params) do
     {:ok, params}
   end

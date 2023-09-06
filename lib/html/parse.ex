@@ -1,4 +1,4 @@
-defmodule InsigniaNotify.Parse do
+defmodule InsigniaNotify.Html.Parse do
   def parse_games_row(row) do
     {_, _, tds} = row
 

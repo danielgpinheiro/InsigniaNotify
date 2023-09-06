@@ -1,4 +1,4 @@
-defmodule InsigniaNotify.State do
+defmodule InsigniaNotify.Data.State do
   use Agent
   @initial_games_row []
   @initial_stats []

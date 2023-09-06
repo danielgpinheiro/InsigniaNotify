@@ -1,7 +1,7 @@
-defmodule InsigniaNotify.Find do
-  alias InsigniaNotify.HandleResponse
-  alias InsigniaNotify.Parse
-  alias InsigniaNotify.State
+defmodule InsigniaNotify.Html.Find do
+  alias InsigniaNotify.Http.HandleResponse
+  alias InsigniaNotify.Html.Parse
+  alias InsigniaNotify.Data.State
 
   def find_games_row({:ok, html}, games_table_rows_selector, games_state_name) do
     Floki.find(html, games_table_rows_selector)

@@ -1,12 +1,12 @@
 defmodule InsigniaNotify do
-  alias InsigniaNotify.Find
-  alias InsigniaNotify.Http
+  alias InsigniaNotify.Html.Find
+  alias InsigniaNotify.Http.GetHTML
   alias InsigniaNotify.Job.Execute
-  alias InsigniaNotify.State
+  alias InsigniaNotify.Data.State
 
   @base_url "http://localhost:8080"
-  # @games_table_rows_selector "#games table tbody tr:nth-child(-n+3)"
-  @games_table_rows_selector "#games table tbody tr:nth-child(1)"
+  # @base_url "https://insignia.live/"
+  @games_table_rows_selector "#games table tbody tr"
   @stats_selector "section#connect"
   @games_state_name :games
   @stats_state_name :stats
@@ -19,7 +19,7 @@ defmodule InsigniaNotify do
   end
 
   def get_and_parse do
-    Http.get(@base_url)
+    GetHTML.get_insignia_data(@base_url)
     |> parse_document()
   end
 
@@ -53,21 +53,19 @@ defmodule InsigniaNotify do
 
       prev_game_active_players = Map.get(prev_state_game, :active_players)
 
-      IO.inspect(game_serial)
-
       if prev_game_active_players < game_active_players do
+        IO.inspect(game_serial)
+        IO.inspect(game_active_players)
         IO.inspect("ta maior")
+        IO.inspect("===========")
       end
 
       if prev_game_active_players > game_active_players do
+        IO.inspect(game_serial)
+        IO.inspect(game_active_players)
         IO.inspect("ta menor")
+        IO.inspect("===========")
       end
-
-      if prev_game_active_players == game_active_players do
-        IO.inspect("ta igual")
-      end
-
-      IO.inspect("===========")
     end)
   end
 end

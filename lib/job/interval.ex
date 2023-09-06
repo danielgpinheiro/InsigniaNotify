@@ -1,7 +1,7 @@
 defmodule InsigniaNotify.Job.Interval do
   use GenServer
 
-  @time 5000
+  @time 600_000
 
   def start_link(initial_value) do
     GenServer.start_link(__MODULE__, initial_value, name: __MODULE__)
