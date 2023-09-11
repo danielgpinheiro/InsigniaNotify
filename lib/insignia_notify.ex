@@ -13,7 +13,6 @@ defmodule InsigniaNotify do
 
   def run do
     Execute.start(:normal, :args)
-    State.start_link(@games_state_name, @stats_state_name)
 
     get_and_parse()
 

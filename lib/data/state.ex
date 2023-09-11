@@ -1,11 +1,10 @@
 defmodule InsigniaNotify.Data.State do
   use Agent
-  @initial_games_row []
-  @initial_stats []
-
-  def start_link(games_state_name, stats_state_name) do
-    Agent.start_link(fn -> @initial_games_row end, name: games_state_name)
-    Agent.start_link(fn -> @initial_stats end, name: stats_state_name)
+  def start_link(args) do
+    init = args[:initial_value]
+    name = args[:name] || __MODULE__
+    IO.puts "Starting agent #{name}"
+    Agent.start_link(fn -> init end, name: name)
   end
 
   def get(state_name) do
