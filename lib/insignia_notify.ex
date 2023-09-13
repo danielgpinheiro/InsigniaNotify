@@ -11,7 +11,7 @@ defmodule InsigniaNotify do
   @games_state_name :games
   @stats_state_name :stats
 
-  def run do
+  def run_dev do
     Execute.start(:normal, :args)
 
     get_and_parse()

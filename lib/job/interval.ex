@@ -9,7 +9,8 @@ defmodule InsigniaNotify.Job.Interval do
 
   @impl true
   def init(opts) do
-    IO.inspect("InsigniaNotify.Job.Interval init")
+    IO.puts("InsigniaNotify.Job.Interval init")
+
     Process.send_after(self(), :tick, @time)
 
     {:ok, opts}

@@ -14,10 +14,18 @@ defmodule InsigniaNotify.MixProject do
 
   # Run "mix help compile.app" to learn about applications.
   def application do
-    [
-      extra_applications: [:logger],
-      mod: {InsigniaNotify.Job.Execute, []}
-    ]
+    env = Application.get_env(:insignia_notify, :environment)
+
+    if env == :prod do
+      [
+        extra_applications: [:logger],
+        mod: {InsigniaNotify.Job.Execute, []}
+      ]
+    else
+      [
+        extra_applications: [:logger]
+      ]
+    end
   end
 
   # Run "mix help deps" to learn about dependencies.
