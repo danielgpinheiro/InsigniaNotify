@@ -23,7 +23,7 @@ defmodule InsigniaNotify.Job.Interval do
       |> DateTime.to_time()
       |> Time.to_iso8601()
 
-    IO.puts("#{time}")
+    IO.puts("Tick - #{time}")
 
     InsigniaNotify.get_and_parse()
 
